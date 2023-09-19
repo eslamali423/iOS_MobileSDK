@@ -19,10 +19,10 @@ public struct convertedinMobileSDK {
 //    public func identifyUser(email: String?, countryCode: String, phone: String?){
 //        let url = URL(string: "")
 //        URLSession.shared.dataTask(with: url!) { data, response, error in
-//            
+//
 //             guard let data else { return }
 //             guard let response = response as? HTTPURLResponse, 200 ... 299  ~= response.statusCode else { return }
-//             
+//
 //             // JSONDecoder() converts data to model of type Array
 ////             do {
 ////                 //let products = try JSONDecoder().decode([Products].self, from: data)
@@ -32,11 +32,11 @@ public struct convertedinMobileSDK {
 ////
 ////             }
 //         }.resume()
-//        
+//
 //    }
     
     
-    func identifyUser(email: String?, countryCode: String?, phone: String?){
+   public func identifyUser(email: String?, countryCode: String?, phone: String?){
 
         //declare parameter as a dictionary which contains string as key and value combination.
         guard let pixelId else {return}
