@@ -69,7 +69,7 @@ public struct convertedinMobileSDK {
         }
         
         //HTTP Headers
-        request.addValue(storeUrl forHTTPHeaderField: "Referer")
+        request.addValue(storeUrl, forHTTPHeaderField: "Referer")
         
         //create dataTask using the session object to send data to the server
         let task = session.dataTask(with: request, completionHandler: { data, response, error in
