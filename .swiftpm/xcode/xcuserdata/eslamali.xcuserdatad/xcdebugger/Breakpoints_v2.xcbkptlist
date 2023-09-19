@@ -62,8 +62,8 @@
             filePath = "Sources/convertedinMobileSDK/convertedinMobileSDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "identifyUser(email:countryCode:phone:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "Sources/convertedinMobileSDK/convertedinMobileSDK.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "identifyUser(email:countryCode:phone:)"
             landmarkType = "7">
          </BreakpointContent>
