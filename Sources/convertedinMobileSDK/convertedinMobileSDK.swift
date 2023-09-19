@@ -151,7 +151,8 @@ public struct convertedinMobileSDK {
             }
             if let data = data {
                 do {
-                    let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+                    
+                    let userData = try JSONDecoder().decode([identifyUserModel].self, from: data)
                   //  let json = try JSONSerialization.jsonObject(with: data, options: [])
                     print(userData)
                 } catch {
