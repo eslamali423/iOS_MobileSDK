@@ -78,15 +78,12 @@ public struct convertedinMobileSDK {
             
             guard let data = data else { return }
             
-            
             do {
                 
+                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+                print("==========")
+                print(userData)
                 
-                // Serialize to JSON
-                let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String:AnyObject]
-                
-                print("---------")
-                print(jsonData)
                 // Convert to a string and print
                 //                if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
                 //                    print("==========")
