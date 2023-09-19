@@ -152,14 +152,14 @@ public struct convertedinMobileSDK {
             if let data = data {
                 do {
                     
-                    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [.fragmentsAllowed])
-                    let decodeed = String(data: jsonData ?? Data(), encoding: .utf8)
-                    print(decodeed)
+//                    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [.fragmentsAllowed])
+//                    let decodeed = String(data: jsonData ?? Data(), encoding: .utf8)
+//                    print(decodeed)
                     
-                  //  let usermodel: identifyUserModel  = try CustomDecoder.decode(data: data)
+                    let usermodel: identifyUserModel  = try CustomDecoder.decode(data: data)
 //                    let responseData = String(data: data, encoding: String.Encoding.utf8)
 //                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
-                  //  print(usermodel)
+                    print(usermodel)
                 } catch {
                     print(error)
                 }
