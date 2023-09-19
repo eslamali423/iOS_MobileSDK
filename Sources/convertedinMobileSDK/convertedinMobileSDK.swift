@@ -13,6 +13,7 @@ public struct convertedinMobileSDK {
         self.pixelId = pixelId
         self.storeUrl = storeUrl
         
+        self.identifyUser(email: "e.ali@converted.in", countryCode: nil, phone: nil)
     }
     
     //MARK:- Functions
