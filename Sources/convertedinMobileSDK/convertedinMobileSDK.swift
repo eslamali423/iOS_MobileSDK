@@ -147,11 +147,13 @@ public struct convertedinMobileSDK {
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
                 print(response)
+                
             }
             if let data = data {
                 do {
+                    let responseData = String(data: data, encoding: String.Encoding.utf8)
                     let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
-                    print(json)
+                    print(responseData)
                 } catch {
                     print(error)
                 }
