@@ -12,3 +12,8 @@ struct identifyUserModel: Codable {
     let cid: String?
     let  csid: String?
 }
+
+
+struct eventModel: Codable {
+    let msg: String?
+}

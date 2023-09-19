@@ -14,7 +14,7 @@ class NetworkManager {
     
     enum requestType: String {
         case identify = "identity"
-        case event = "event"
+        case event = "events"
     }
     
     func PostAPI(pixelId: String?, storeUrl: String?, parameters: [String: Any], type: requestType, compeletion: @escaping (Data?) -> Void){
@@ -22,16 +22,7 @@ class NetworkManager {
         guard let storeUrl else {return}
         let Url = String(format: "https://test.convertedin.com/api/v1/\(pixelId)/\(type.rawValue)")
         guard let serviceUrl = URL(string: Url) else { return }
-   
-//        var parameterDictionary = ["csid": "deviceToken" ]
-//        if let email = email {
-//            parameterDictionary["email"] = email
-//        }
-//
-//        if let countryCode = countryCode, let phone = phone {
-//            parameterDictionary["country_code"] = countryCode
-//            parameterDictionary["phone"] = phone
-//        }
+
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue(storeUrl, forHTTPHeaderField: "Referer")
