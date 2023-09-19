@@ -78,8 +78,10 @@ public struct convertedinMobileSDK {
             
             guard let data = data else { return }
             
+
             do {
-                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+                let userData = try JSONSerialization.data(withJSONObject: data, options: [])
+              //  let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
                 print("==========")
                 print(userData)
             }
@@ -87,11 +89,13 @@ public struct convertedinMobileSDK {
                 print(error.localizedDescription)
             }
             
+            
+            
 //            do {
 //                //create json object from data
 //                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
 //                print(json)
-//                
+//
 //            } catch let error {
 //                print(error.localizedDescription)
 //            }
