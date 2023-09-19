@@ -80,10 +80,21 @@ public struct convertedinMobileSDK {
             
 
             do {
-              //  let userData = try JSONSerialization.data(withJSONObject: data, options: [])
-                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
-                print("==========")
-                print(userData)
+                
+                
+                // Serialize to JSON
+                let jsonData = try JSONSerialization.data(withJSONObject: data)
+
+                // Convert to a string and print
+                if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+                    print("==========")
+                    print(JSONString)
+                }
+                
+//              //  let userData = try JSONSerialization.data(withJSONObject: data, options: [])
+//                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+//                print("==========")
+//                print(userData)
             }
             catch let error {
                 print(error.localizedDescription)
