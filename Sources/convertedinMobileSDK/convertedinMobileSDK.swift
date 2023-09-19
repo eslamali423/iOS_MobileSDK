@@ -152,7 +152,7 @@ public struct convertedinMobileSDK {
             if let data = data {
                 do {
                     
-                    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [])
+                    let jsonData = try? JSONSerialization.data(withJSONObject: data, options: [.fragmentsAllowed])
                     let decodeed = String(data: jsonData ?? Data(), encoding: .utf8)
                     print(decodeed)
                     
