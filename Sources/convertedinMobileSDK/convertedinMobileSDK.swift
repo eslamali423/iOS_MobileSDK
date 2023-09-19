@@ -138,6 +138,7 @@ public struct convertedinMobileSDK {
         var request = URLRequest(url: serviceUrl)
         request.httpMethod = "POST"
         request.setValue(storeUrl, forHTTPHeaderField: "Referer")
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameterDictionary, options: []) else {
             return
         }
