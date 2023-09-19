@@ -54,4 +54,30 @@ public struct convertedinMobileSDK {
                 }
         }.resume()
     }
+    
+    public func getuserdata(email: String?, countryCode: String?, phone: String?){
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+        
+        var parameterDictionary = ["csid": "deviceToken" ]
+        if let email = email {
+            parameterDictionary["email"] = email
+        }
+        
+        if let countryCode = countryCode, let phone = phone {
+            parameterDictionary["country_code"] = countryCode
+            parameterDictionary["phone"] = phone
+        }
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .identify) { data in
+            guard  let data = data else {return}
+                do {
+                    let usermodel: identifyUserModel  = try CustomDecoder.decode(data: data)
+                    print(usermodel)
+                } catch {
+                    print(error)
+                }
+        }
+        
+    }
 }
