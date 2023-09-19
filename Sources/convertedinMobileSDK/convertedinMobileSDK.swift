@@ -72,32 +72,37 @@ public struct convertedinMobileSDK {
         request.addValue(storeUrl, forHTTPHeaderField: "Referer")
         
         //create dataTask using the session object to send data to the server
-        let task = session.dataTask(with: request, completionHandler: { data, response, error in
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) in
             
             guard error == nil else { return }
             
             guard let data = data else { return }
             
-            do {
-                
-                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
-                print("==========")
-                print(userData)
-                
-                // Convert to a string and print
-                //                if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
-                //                    print("==========")
-                //                    print(JSONString)
-                //                }
-                
-                //              //  let userData = try JSONSerialization.data(withJSONObject: data, options: [])
-                //                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
-                //                print("==========")
-                //                print(userData)
-            }
-            catch let error {
-                print(error.localizedDescription)
-            }
+            let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String?
+            //send this block to required place
+            print("==========")
+            print(outputStr)
+            
+            //            do {
+            //
+            //                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+            //                print("==========")
+            //                print(userData)
+            //
+            //                // Convert to a string and print
+            //                //                if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+            //                //                    print("==========")
+            //                //                    print(JSONString)
+            //                //                }
+            //
+            //                //              //  let userData = try JSONSerialization.data(withJSONObject: data, options: [])
+            //                //                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+            //                //                print("==========")
+            //                //                print(userData)
+            //            }
+            //            catch let error {
+            //                print(error.localizedDescription)
+            //            }
             
             
             
