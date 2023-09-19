@@ -13,7 +13,7 @@ public struct convertedinMobileSDK {
         self.pixelId = pixelId
         self.storeUrl = storeUrl
         
-        self.identifyUser(email: "e.ali@converted.in", countryCode: nil, phone: nil)
+        self.identifyUser(email: "eslam.ali4233@gmail.com", countryCode: nil, phone: nil)
     }
     
     //MARK:- Functions
@@ -151,6 +151,7 @@ public struct convertedinMobileSDK {
             }
             if let data = data {
                 do {
+                    
                     let responseData = String(data: data, encoding: String.Encoding.utf8)
                     let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
                     print(responseData)
