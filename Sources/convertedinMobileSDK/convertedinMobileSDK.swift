@@ -152,9 +152,10 @@ public struct convertedinMobileSDK {
             if let data = data {
                 do {
                     
-                    let responseData = String(data: data, encoding: String.Encoding.utf8)
-                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
-                    print(responseData)
+                    let usermodel: identifyUserModel  = try CustomDecoder.decode(data: data)
+//                    let responseData = String(data: data, encoding: String.Encoding.utf8)
+//                    let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments])
+                    print(usermodel)
                 } catch {
                     print(error)
                 }
@@ -168,4 +169,14 @@ public struct convertedinMobileSDK {
 struct identifyUserModel: Codable {
     let cid: String?
     let  csid: String?
+}
+
+
+struct CustomDecoder {
+    
+    static func decode<T: Codable>(data: Data) throws -> T {
+        let decoder = JSONDecoder()
+        return try decoder.decode(T.self, from: data)
+    }
+
 }
