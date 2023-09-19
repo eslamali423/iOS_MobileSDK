@@ -80,8 +80,8 @@ public struct convertedinMobileSDK {
             
 
             do {
-                let userData = try JSONSerialization.data(withJSONObject: data, options: [])
-              //  let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
+              //  let userData = try JSONSerialization.data(withJSONObject: data, options: [])
+                let userData = try JSONDecoder().decode(identifyUserModel.self, from: data)
                 print("==========")
                 print(userData)
             }
