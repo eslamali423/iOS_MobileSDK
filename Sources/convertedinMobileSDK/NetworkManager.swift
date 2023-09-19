@@ -45,12 +45,6 @@ class NetworkManager {
             guard let response = response else {return}
             guard  let data = data else {return}
             compeletion(data)
-                do {
-                    let usermodel: identifyUserModel  = try CustomDecoder.decode(data: data)
-                    print(usermodel)
-                } catch {
-                    print(error)
-                }
         }.resume()
     }
     
