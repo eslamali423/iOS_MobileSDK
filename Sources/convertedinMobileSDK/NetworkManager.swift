@@ -26,10 +26,10 @@ class NetworkManager {
         var url = ""
         switch type {
         case .identify, .event:
-            url = String(format: "https://test.convertedin.com/api/v1/\(pixelId)/\(type.rawValue)")
+            url = String(format: "https://convertedin.com/api/v1/\(pixelId)/\(type.rawValue)")
         
         case .saveToken, .deleteToken, .refreshToken:
-            url = String(format: "https://test.convertedin.com/api/webhooks/push-notification/\(pixelId)/\(type.rawValue)")
+            url = String(format: "https://convertedin.com/api/webhooks/push-notification/\(pixelId)/\(type.rawValue)")
         }
         guard let serviceUrl = URL(string: url) else { return }
 
