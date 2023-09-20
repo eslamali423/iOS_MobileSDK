@@ -55,66 +55,9 @@ public class convertedinMobileSDK {
         }
     }
     
-    public func addCustomEvent(eventName: String, currency: String ,total: String ,products: [String: Any]){
-        guard let pixelId else {return}
-        guard let storeUrl else {return}
-        guard let cid else {return}
-        guard let cuid else {return}
-        
-        // Body [event,cid,cuid,data]
-        let parameterDictionary:  [String: Any] = [
-            "event" : eventName,
-            "cuid": cuid,
-            "cid" : cid,
-            "data" : [
-                "currency" : currency,
-                "value": total,
-                "content" : products
-            ] as [String : Any]
-        ]
-        
-        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .event) { data in
-            guard  let data = data else {return}
-            do {
-                let eventModel: eventModel  = try CustomDecoder.decode(data: data)
-                print(eventModel.msg ?? "")
-                
-            } catch {
-                print(error)
-            }
-        }
-    }
+   
     
-    public func addEvent(event: eventType, currency: String ,total: String ,products: [String: Any]){
-        guard let pixelId else {return}
-        guard let storeUrl else {return}
-        guard let cid else {return}
-        guard let cuid else {return}
-        
-        // Body [event,cid,cuid,data]
-        let parameterDictionary:  [String: Any] = [
-            "event" : event.rawValue,
-            "cuid": cuid,
-            "cid" : cid,
-            "data" : [
-                "currency" : currency,
-                "value": total,
-                "content" : products
-            ] as [String : Any]
-        ]
-        
-        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .event) { data in
-            guard  let data = data else {return}
-            do {
-                let eventModel: eventModel  = try CustomDecoder.decode(data: data)
-                print(eventModel.msg ?? "")
-                
-            } catch {
-                print(error)
-            }
-        }
-    }
-    
+
     public func saveDeviceToken(token: String) {
         guard let pixelId else {return}
         guard let storeUrl else {return}
@@ -186,4 +129,55 @@ public class convertedinMobileSDK {
         }
     }
     
+    //MARK:- Events
+    public func addEvent(eventName: String, currency: String ,total: String ,products: [String: Any]){
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+        guard let cid else {return}
+        guard let cuid else {return}
+        
+        // Body [event,cid,cuid,data]
+        let parameterDictionary:  [String: Any] = [
+            "event" : eventName,
+            "cuid": cuid,
+            "cid" : cid,
+            "data" : [
+                "currency" : currency,
+                "value": total,
+                "content" : products
+            ] as [String : Any]
+        ]
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .event) { data in
+            guard  let data = data else {return}
+            do {
+                let eventModel: eventModel  = try CustomDecoder.decode(data: data)
+                print(eventModel.msg ?? "")
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    public func viewContentEvent(currency: String ,total: String ,products: [String: Any]) {
+        addEvent(eventName: eventType.viewContent.rawValue , currency: currency, total: total, products: products)
+    }
+    
+    public func pageViewEvent(currency: String ,total: String ,products: [String: Any]){
+        addEvent(eventName: eventType.viewPage.rawValue , currency: currency, total: total, products: products)
+    }
+    
+    public func addToCartEvent(currency: String ,total: String ,products: [String: Any]){
+        addEvent(eventName: eventType.addToCart.rawValue , currency: currency, total: total, products: products)
+    }
+    
+    public func initiateCheckoutEvent(currency: String ,total: String ,products: [String: Any]){
+        addEvent(eventName: eventType.checkout.rawValue , currency: currency, total: total, products: products)
+    }
+    
+    public func purchaseEvent(currency: String ,total: String ,products: [String: Any]){
+        addEvent(eventName: eventType.purchase.rawValue , currency: currency, total: total, products: products)
+    }
+ 
 }
