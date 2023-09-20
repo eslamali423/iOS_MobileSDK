@@ -16,6 +16,8 @@ class NetworkManager {
         case identify = "identity"
         case event = "events"
         case saveToken = "deviceTokens/save"
+        case deleteToken = "deviceTokens/delete"
+        case refreshToken = "deviceTokens/refresh"
     }
     
     func PostAPI(pixelId: String?, storeUrl: String?, parameters: [String: Any], type: requestType, compeletion: @escaping (Data?) -> Void){
@@ -23,11 +25,10 @@ class NetworkManager {
         guard let storeUrl else {return}
         var url = ""
         switch type {
-        
         case .identify, .event:
             url = String(format: "https://test.convertedin.com/api/v1/\(pixelId)/\(type.rawValue)")
         
-        case .saveToken:
+        case .saveToken, .deleteToken, .refreshToken:
             url = String(format: "https://test.convertedin.com/api/webhooks/push-notification/\(pixelId)/\(type.rawValue)")
         }
         guard let serviceUrl = URL(string: url) else { return }

@@ -8,6 +8,14 @@ public class convertedinMobileSDK {
     private var storeUrl : String?
     private var cid: String?
     private var cuid: String?
+   
+   public enum eventType: String {
+        case purchase = "Purchase"
+        case checkout = "InitiateCheckout"
+        case addToCart = "AddToCart"
+        case viewPage = "PageView"
+        case viewContent = "ViewContent"
+    }
     
     
     //MARK:- Initlizers
@@ -47,7 +55,7 @@ public class convertedinMobileSDK {
         }
     }
     
-    public func addEvent(eventName: String, currency: String ,total: String ,products: [String: Any]){
+    public func addCustomEvent(eventName: String, currency: String ,total: String ,products: [String: Any]){
         guard let pixelId else {return}
         guard let storeUrl else {return}
         guard let cid else {return}
@@ -56,6 +64,36 @@ public class convertedinMobileSDK {
         // Body [event,cid,cuid,data]
         let parameterDictionary:  [String: Any] = [
             "event" : eventName,
+            "cuid": cuid,
+            "cid" : cid,
+            "data" : [
+                "currency" : currency,
+                "value": total,
+                "content" : products
+            ] as [String : Any]
+        ]
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .event) { data in
+            guard  let data = data else {return}
+            do {
+                let eventModel: eventModel  = try CustomDecoder.decode(data: data)
+                print(eventModel.msg ?? "")
+                
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    public func addEvent(event: eventType, currency: String ,total: String ,products: [String: Any]){
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+        guard let cid else {return}
+        guard let cuid else {return}
+        
+        // Body [event,cid,cuid,data]
+        let parameterDictionary:  [String: Any] = [
+            "event" : event.rawValue,
             "cuid": cuid,
             "cid" : cid,
             "data" : [
@@ -100,9 +138,52 @@ public class convertedinMobileSDK {
         }
     }
     
-    public func deleteDeviceToken(token: String){
-        let oldDeviceToekn = UserDefaults.standard.string(forKey: "current_device_token")
-        print("old token : \(oldDeviceToekn)")
+    public func deleteDeviceToken() {
+        guard let token  = UserDefaults.standard.string(forKey: "current_device_token") else {return}
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+    
+        let parameterDictionary:  [String: Any] = [
+            "device_token": token,
+            "token_type" : "iOS",
+        ]
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .deleteToken) { data in
+            guard  let data = data else {return}
+            do {
+                let eventModel: saveTokenModel  = try CustomDecoder.decode(data: data)
+                print(eventModel.message ?? "")
+                UserDefaults.standard.setValue(token, forKey: "current_device_token")
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    public func refreshDeviceToken(newToken: String){
+        deleteDeviceToken()
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+        let oldToken = UserDefaults.standard.string(forKey: "current_device_token") ?? ""
+        
+        let parameterDictionary:  [String: Any] = [
+            
+            "device_token": oldToken,
+            "token_type" : "iOS",
+            "new_device_token": newToken,
+            "new_token_type" : "iOS",
+        ]
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .refreshToken) { data in
+            guard  let data = data else {return}
+            do {
+                let eventModel: saveTokenModel  = try CustomDecoder.decode(data: data)
+                print(eventModel.message ?? "")
+                UserDefaults.standard.setValue(newToken, forKey: "current_device_token")
+            } catch {
+                print(error)
+            }
+        }
     }
     
 }
