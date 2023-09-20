@@ -99,4 +99,10 @@ public class convertedinMobileSDK {
             }
         }
     }
+    
+    public func deleteDeviceToken(token: String){
+        let oldDeviceToekn = UserDefaults.standard.string(forKey: "current_device_token")
+        print("old token : \(oldDeviceToekn)")
+    }
+    
 }
