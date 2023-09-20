@@ -40,12 +40,12 @@ public class convertedinMobileSDK {
                     print(identifyUserModel)
                     self.cid = identifyUserModel.cid
                     self.cuid = identifyUserModel.csid
+
                 } catch {
                     print(error)
                 }
         }
     }
-    
     
     public func addEvent(eventName: String, currency: String ,total: String ,products: [String: Any]){
         guard let pixelId else {return}
@@ -74,9 +74,29 @@ public class convertedinMobileSDK {
             } catch {
                 print(error)
             }
-            
         }
-       
+    }
+    
+    public func saveDeviceToken(token: String) {
+        guard let pixelId else {return}
+        guard let storeUrl else {return}
+        guard let cid else {return}
         
+        let parameterDictionary:  [String: Any] = [
+            "customer_id" : cid,
+            "device_token": token,
+            "token_type" : "iOS",
+        ]
+        
+        NetworkManager.shared.PostAPI(pixelId: pixelId, storeUrl: storeUrl, parameters: parameterDictionary, type: .saveToken) { data in
+            guard  let data = data else {return}
+            do {
+                let eventModel: saveTokenModel  = try CustomDecoder.decode(data: data)
+                print(eventModel.message ?? "")
+                UserDefaults.standard.setValue(token, forKey: "current_device_token")
+            } catch {
+                print(error)
+            }
+        }
     }
 }

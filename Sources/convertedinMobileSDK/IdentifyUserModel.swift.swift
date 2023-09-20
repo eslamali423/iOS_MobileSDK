@@ -17,3 +17,8 @@ struct identifyUserModel: Codable {
 struct eventModel: Codable {
     let msg: String?
 }
+
+struct saveTokenModel: Codable {
+    let message: String?
+}
+
